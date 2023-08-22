@@ -1,20 +1,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class = "col-md-6 offset-md-3"> 
     
     {% if user.is_authenticated %}
-    <h1> Hello World </h1>
+    <h1> Registros de clientes </h1>
+
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Email</th>
+          <th scope="col">Número de teléfono</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Ciudad</th>
+          <th scope="col">Provincia</th>
+          <th scope="col">Código Zip</th>
+          <th scope="col">Creado el</th>
+          <th scope="col">ID</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          {% if records %}
+              {% for record in records %}
+                <tr>
+                  <td><a href="{% url 'record' record.id %}">{{ record.first_name }} {{ record.last_name }}</a></td>
+                  <td>{{ record.email }}</td>
+                  <td>{{ record.phone }}</td>
+                  <td>{{ record.address }}</td>
+                  <td>{{ record.city }}</td>
+                  <td>{{ record.state }}</td>
+                  <td>{{ record.zipcode }}</td>
+                  <td>{{ record.created_at }}</td>
+                  <td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+                  <br/><br/>
+                </tr>
+              {% endfor %}
+
+          {% endif %}
+        </tr>
+      </tbody>
+    </table>
+      
+
+    
 
     {% else %}
-
+    
+    <div class = "col-md-6 offset-md-3"> 
     <h1> Login </h1>
     <br/>
 
     <form method="POST" action="{% url 'home' %}">
         {% csrf_token %}
-        <form>
             <div class="form-group">
               <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="First Name" name = "username" required>
             </div>
@@ -24,10 +62,7 @@
             </div>
             <br/>
             <button type="submit" class="btn btn-secondary">Login</button>
-          </form>
     </form>
-
-</div>
 
 {% endif %}
 
