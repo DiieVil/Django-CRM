@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dvdatabase',
         'USER': 'root',
-        'PASSWORD': 'mysqlpsw',
+        'PASSWORD': '####',
         'HOST': 'localhost',
         'PORT': '3800',
     }
